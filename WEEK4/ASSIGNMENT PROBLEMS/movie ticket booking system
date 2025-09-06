@@ -1,0 +1,52 @@
+class MovieTicket {
+    String movieName;
+    String theatreName;
+    int seatNumber;
+    double price;
+
+    // 1. Default constructor
+    public MovieTicket() {
+        this("Unknown", "Unknown Theatre", 0, 0);
+    }
+
+    // 2. Constructor with movie name (price default 200)
+    public MovieTicket(String movieName) {
+        this(movieName, "Unknown Theatre", 0, 200);
+    }
+
+    // 3. Constructor with movie name and seat number (theatre default "PVR")
+    public MovieTicket(String movieName, int seatNumber) {
+        this(movieName, "PVR", seatNumber, 200);
+    }
+
+    // 4. Full constructor
+    public MovieTicket(String movieName, String theatreName, int seatNumber, double price) {
+        this.movieName = movieName;
+        this.theatreName = theatreName;
+        this.seatNumber = seatNumber;
+        this.price = price;
+    }
+
+    // Print ticket details
+    public void printTicket() {
+        System.out.println("Movie: " + movieName);
+        System.out.println("Theatre: " + theatreName);
+        System.out.println("Seat Number: " + seatNumber);
+        System.out.println("Price: ₹" + price);
+        System.out.println("---------------------------");
+    }
+}
+
+public class MovieBooking {
+    public static void main(String[] args) {
+        MovieTicket ticket1 = new MovieTicket();
+        MovieTicket ticket2 = new MovieTicket("Inception");
+        MovieTicket ticket3 = new MovieTicket("Avengers", 15);
+        MovieTicket ticket4 = new MovieTicket("Interstellar", "IMAX", 22, 350);
+
+        ticket1.printTicket();
+        ticket2.printTicket();
+        ticket3.printTicket();
+        ticket4.printTicket();
+    }
+}
