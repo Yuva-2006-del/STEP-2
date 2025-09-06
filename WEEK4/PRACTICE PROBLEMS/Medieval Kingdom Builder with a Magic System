@@ -1,0 +1,147 @@
+abstract class MagicalStructure {
+    String name;
+    int magicPower;
+    boolean isActive;
+
+    public MagicalStructure() {
+        this("Unknown", 0, false);
+    }
+
+    public MagicalStructure(String name, int magicPower, boolean isActive) {
+        this.name = name;
+        this.magicPower = magicPower;
+        this.isActive = isActive;
+    }
+
+    public abstract void castSpell();
+}
+
+// Wizard Tower class
+class WizardTower extends MagicalStructure {
+    int spellCapacity;
+
+    public WizardTower() {
+        this("Basic Tower", 50, true, 5);
+    }
+
+    public WizardTower(String name, int magicPower, boolean isActive, int spellCapacity) {
+        super(name, magicPower, isActive);
+        this.spellCapacity = spellCapacity;
+    }
+
+    @Override
+    public void castSpell() {
+        System.out.println(name + " casts fireball with capacity " + spellCapacity);
+    }
+}
+
+// Enchanted Castle class
+class EnchantedCastle extends MagicalStructure {
+    int defense;
+
+    public EnchantedCastle() {
+        this("Simple Castle", 40, true, 20);
+    }
+
+    public EnchantedCastle(String name, int magicPower, boolean isActive, int defense) {
+        super(name, magicPower, isActive);
+        this.defense = defense;
+    }
+
+    @Override
+    public void castSpell() {
+        System.out.println(name + " raises a shield with defense " + defense);
+    }
+}
+
+// Mystic Library class
+class MysticLibrary extends MagicalStructure {
+    int bookCount;
+
+    public MysticLibrary() {
+        this("Small Library", 30, true, 100);
+    }
+
+    public MysticLibrary(String name, int magicPower, boolean isActive, int bookCount) {
+        super(name, magicPower, isActive);
+        this.bookCount = bookCount;
+    }
+
+    @Override
+    public void castSpell() {
+        System.out.println(name + " shares ancient knowledge with " + bookCount + " books");
+    }
+}
+
+// Dragon Lair class
+class DragonLair extends MagicalStructure {
+    String dragonType;
+
+    public DragonLair() {
+        this("Cave Lair", 80, true, "Fire Dragon");
+    }
+
+    public DragonLair(String name, int magicPower, boolean isActive, String dragonType) {
+        super(name, magicPower, isActive);
+        this.dragonType = dragonType;
+    }
+
+    @Override
+    public void castSpell() {
+        System.out.println(name + " breathes fire of " + dragonType);
+    }
+}
+
+public class MedievalKingdomBuilder {
+    // Check if two structures can interact
+    static boolean canInteract(MagicalStructure s1, MagicalStructure s2) {
+        return (s1 instanceof WizardTower && s2 instanceof MysticLibrary) ||
+               (s1 instanceof MysticLibrary && s2 instanceof WizardTower) ||
+               (s1 instanceof EnchantedCastle && s2 instanceof DragonLair) ||
+               (s1 instanceof DragonLair && s2 instanceof EnchantedCastle);
+    }
+
+    // Calculate total magic power with bonus if multiple towers
+    static int totalMagicPower(MagicalStructure[] structures) {
+        int total = 0;
+        int towerCount = 0;
+        for (MagicalStructure s : structures) {
+            total += s.magicPower;
+            if (s instanceof WizardTower) towerCount++;
+        }
+        if (towerCount > 1) {
+            System.out.println("Magic network bonus applied!");
+            total += towerCount * 10;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        MagicalStructure[] kingdom = {
+            new WizardTower(),
+            new WizardTower("Grand Tower", 70, true, 10),
+            new EnchantedCastle(),
+            new MysticLibrary(),
+            new DragonLair()
+        };
+
+        // Cast spells
+        for (MagicalStructure s : kingdom) {
+            s.castSpell();
+        }
+
+        // Check interactions
+        System.out.println("\nInteractions:");
+        for (int i = 0; i < kingdom.length; i++) {
+            for (int j = i+1; j < kingdom.length; j++) {
+                if (canInteract(kingdom[i], kingdom[j])) {
+                    System.out.println(kingdom[i].name + " can interact with " + kingdom[j].name);
+                }
+            }
+        }
+
+        // Total magic power
+        int power = totalMagicPower(kingdom);
+        System.out.println("\nTotal Kingdom Magic Power: " + power);
+    }
+}
