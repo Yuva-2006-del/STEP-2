@@ -1,0 +1,113 @@
+import java.util.UUID;
+import java.util.Random;
+
+public class VirtualPet {
+    private final String petId;
+    private String name, species, stage;
+    private int age, happiness, health;
+    private boolean isGhost = false;
+
+    private static final String[] STAGES = {"Egg", "Baby", "Child", "Teen", "Adult", "Elder"};
+    private static final Random rand = new Random();
+
+    // Constructors
+    public VirtualPet() {
+        this("Unknown", randomSpecies(), 0, 50, 50, STAGES[0]);
+    }
+
+    public VirtualPet(String name) {
+        this(name, randomSpecies(), 1, 60, 60, STAGES[1]);
+    }
+
+    public VirtualPet(String name, String species) {
+        this(name, species, 2, 70, 70, STAGES[2]);
+    }
+
+    public VirtualPet(String name, String species, int age, int happiness, int health, String stage) {
+        this.petId = UUID.randomUUID().toString();
+        this.name = name;
+        this.species = species;
+        this.age = age;
+        this.happiness = happiness;
+        this.health = health;
+        this.stage = stage;
+    }
+
+    public void simulateDay() {
+        if (isGhost) {
+            System.out.println(name + " is haunting the daycare... 👻");
+            return;
+        }
+
+        age++;
+        happiness += rand.nextInt(5) - 2;
+        health += rand.nextInt(5) - 3;
+
+        if (health <= 0) {
+            becomeGhost();
+        } else {
+            evolve();
+        }
+    }
+
+    public void feed() { if (!isGhost) { happiness += 5; health += 5; } }
+    public void play() { if (!isGhost) { happiness += 10; health -= 2; } }
+    public void heal() { if (!isGhost) { health += 10; } }
+
+    private void evolve() {
+        int index = stageIndex(stage);
+        if (index < STAGES.length - 1 && age >= (index + 1) * 2) {
+            stage = STAGES[index + 1];
+            System.out.println(name + " evolved to: " + stage + "!");
+        }
+    }
+
+    private void becomeGhost() {
+        isGhost = true;
+        species = "Ghost";
+        stage = "Ghost";
+        health = 0;
+        happiness = 0;
+        System.out.println(name + " has died and become a Ghost! 👻");
+    }
+
+    public void showStatus() {
+        System.out.printf("🧬 %s | %s (%s) | Age: %d | 😊 %d | ❤️ %d | Stage: %s%n",
+                petId.substring(0, 6), name, species, age, happiness, health, stage);
+    }
+
+    private static int stageIndex(String s) {
+        for (int i = 0; i < STAGES.length; i++)
+            if (STAGES[i].equalsIgnoreCase(s)) return i;
+        return 0;
+    }
+
+    private static String randomSpecies() {
+        String[] list = {"Cat", "Dog", "Dragon", "Slime"};
+        return list[rand.nextInt(list.length)];
+    }
+
+    // 🧪 Main Method
+    public static void main(String[] args) {
+        VirtualPet pet1 = new VirtualPet();
+        VirtualPet pet2 = new VirtualPet("Fluffy");
+        VirtualPet pet3 = new VirtualPet("Blaze", "Dragon");
+
+        VirtualPet[] pets = {pet1, pet2, pet3};
+
+        for (int day = 1; day <= 3; day++) {
+            System.out.println("\n📅 Day " + day);
+            for (VirtualPet pet : pets) {
+                pet.simulateDay();
+
+                // Random care action
+                int action = rand.nextInt(3);
+                if (action == 0) pet.feed();
+                else if (action == 1) pet.play();
+                else pet.heal();
+
+                pet.showStatus();
+            }
+        }
+    }
+}
