@@ -1,0 +1,77 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class ShoppingCartDebug {
+    private JCheckBox laptop, phone, headphones;
+    private JButton generateBill;
+    private JTextArea billArea;
+
+    public ShoppingCartDebug() {
+        JFrame frame = new JFrame("Shopping Cart Debug");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout(8,8));
+
+    
+        JPanel items = new JPanel(new GridLayout(0,1,5,5));
+        items.setBorder(BorderFactory.createTitledBorder("Select Items"));
+        laptop = new JCheckBox("Laptop - Rs.50000");
+        phone = new JCheckBox("Phone - Rs.20000");
+        headphones = new JCheckBox("Headphones - Rs.3000");
+        items.add(laptop);
+        items.add(phone);
+        items.add(headphones);
+
+     
+        billArea = new JTextArea(8, 30);
+        billArea.setEditable(false);
+        billArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        JScrollPane scroll = new JScrollPane(billArea);
+
+   
+        generateBill = new JButton("Generate Bill");
+        generateBill.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    System.out.println("DEBUG: Generate Bill clicked");
+                    int total = 0;
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Selected Items:\n\n");
+                    if (laptop.isSelected()) { sb.append("Laptop       - Rs.50000\n"); total += 50000; }
+                    if (phone.isSelected()) { sb.append("Phone        - Rs.20000\n"); total += 20000; }
+                    if (headphones.isSelected()) { sb.append("Headphones   - Rs.3000\n"); total += 3000; }
+                    sb.append("\n-------------------------\n");
+                    sb.append(String.format("Total: Rs.%d\n", total));
+                    billArea.setText(sb.toString());
+                    System.out.println("DEBUG: Total = " + total);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frame, "Error: " + ex.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+  
+        JPanel bottom = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottom.add(generateBill);
+
+        frame.add(items, BorderLayout.NORTH);
+        frame.add(scroll, BorderLayout.CENTER);
+        frame.add(bottom, BorderLayout.SOUTH);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+     
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); } catch (Exception ignored) {}
+                new ShoppingCartDebug();
+            }
+        });
+    }
+}
