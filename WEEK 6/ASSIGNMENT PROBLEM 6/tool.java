@@ -4,16 +4,16 @@ class Tool {
     public String name = "Generic Tool";
 
     public String getSecret() {
-        return secret; // getter for private field
+        return secret; 
     }
 }
 
 class Hammer extends Tool {
     void showAccess() {
-        // System.out.println(secret); ❌ private not accessible
-        System.out.println("Protected: " + usage); // ✅ accessible
-        System.out.println("Public: " + name);     // ✅ accessible
-        System.out.println("Private via getter: " + getSecret()); // ✅
+
+        System.out.println("Protected: " + usage); 
+        System.out.println("Public: " + name);   
+        System.out.println("Private via getter: " + getSecret()); 
     }
 }
 
