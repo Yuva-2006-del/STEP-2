@@ -1,0 +1,11 @@
+Customer       Cart        PaymentService       OrderService
+   |             |                 |                  |
+   |---addItem()→|                 |                  |
+   |             |---calculateTotal()---------------->|
+   |             |<--totalAmount()--------------------|
+   |---makePayment()--------------------------------->|
+   |                              |---processPayment()|
+   |                              |<--paymentSuccess()-|
+   |------------------------------------------------->|
+   |                         confirmOrder()           |
+   |<---------------------orderConfirmed()-------------|
