@@ -1,0 +1,39 @@
++----------------------------+
+|          Bank              |
++----------------------------+
+| - bankName : String        |
+| - branchCode : String      |
++----------------------------+
+| + addCustomer(c : Customer)|
+| + showCustomers() : void   |
++----------------------------+
+
+         1
+Bank -------------------- Customer
+      (association)
+
++----------------------------+
+|         Customer           |
++----------------------------+
+| - name : String            |
+| - customerId : int         |
+| - address : String         |
++----------------------------+
+| + openAccount(a : Account) |
+| + showAccounts() : void    |
++----------------------------+
+
+          1
+Customer <>-------------- Account
+         (aggregation)
+
++----------------------------+
+|          Account           |
++----------------------------+
+| - accountNumber : String   |
+| - balance : double         |
++----------------------------+
+| + deposit(amount : double) |
+| + withdraw(amount : double)|
+| + showDetails() : void     |
++----------------------------+
