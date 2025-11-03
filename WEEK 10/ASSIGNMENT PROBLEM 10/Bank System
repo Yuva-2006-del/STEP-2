@@ -1,0 +1,32 @@
+bank1 : Bank
+  bankName = "State Bank of India"
+  branchCode = "SBI001"
+
+cust1 : Customer
+  name = "Ravi"
+  customerId = 101
+  address = "Chennai"
+
+cust2 : Customer
+  name = "Sneha"
+  customerId = 102
+  address = "Delhi"
+
+acc1 : Account
+  accountNumber = "A001"
+  balance = 5000
+
+acc2 : Account
+  accountNumber = "A002"
+  balance = 12000
+
+acc3 : Account
+  accountNumber = "A003"
+  balance = 8000
+
+Links:
+bank1 → cust1
+bank1 → cust2
+cust1 → acc1
+cust1 → acc2
+cust2 → acc3
