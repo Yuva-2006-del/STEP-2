@@ -1,0 +1,11 @@
+        +---------------------------+
+        |        ATM System         |
+        |---------------------------|
+        |  (1) Withdraw Money       |
+        |  (2) Check Balance        |
+        |  (3) Deposit Money        |
+        +---------------------------+
+                 ^
+                 |
+             [Actor]
+         <<Customer>>
