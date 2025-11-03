@@ -1,0 +1,8 @@
+Customer         OrderService        PaymentGateway        InventoryService
+    |                   |                   |                     |
+    |---placeOrder()--->|                   |                     |
+    |                   |---processPayment()->|                     |
+    |                   |<--paymentStatus()---|                     |
+    |                   |---updateInventory()---------------------->|
+    |                   |<--inventoryUpdated()----------------------|
+    |<--orderConfirmed()-|                   |                     |
