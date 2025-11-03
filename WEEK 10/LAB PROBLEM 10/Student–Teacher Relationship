@@ -1,0 +1,29 @@
+teacher1 : Teacher
+  name = "Karthik"
+  subject = "Maths"
+
+teacher2 : Teacher
+  name = "Anjali"
+  subject = "Science"
+
+student1 : Student
+  name = "Ravi"
+  grade = "10"
+
+student2 : Student
+  name = "Sneha"
+  grade = "10"
+
+student3 : Student
+  name = "Arjun"
+  grade = "9"
+
+student4 : Student
+  name = "Meera"
+  grade = "9"
+
+Links:
+teacher1 → student1
+teacher1 → student2
+teacher2 → student3
+teacher2 → student4
