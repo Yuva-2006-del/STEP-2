@@ -1,0 +1,23 @@
+Actors:
+ [Admin]
+ [Doctor]
+ [Patient]
+
+Use Cases (inside "Hospital Management System"):
+  (1) Manage Appointments
+  (2) Update Records
+  (3) Generate Bills
+  (4) Register Patient
+  (5) View Medical History
+
+Relationships:
+Admin → (Manage Appointments)
+Admin → (Generate Bills)
+Doctor → (Update Records)
+Doctor → (View Medical History)
+Patient → (Register Patient)
+Patient → (View Medical History)
+
+Include / Extend:
+(Generate Bills) <--include-- (Update Records)
+(Manage Appointments) <--extend-- (Register Patient)
