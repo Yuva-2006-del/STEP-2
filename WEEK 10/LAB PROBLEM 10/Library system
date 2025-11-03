@@ -1,0 +1,40 @@
++-----------------------+
+|        Book           |
++-----------------------+
+| - title : String      |
+| - author : String     |
+| - isbn : String       |
++-----------------------+
+| + showDetails()       |
+| + getTitle() : String |
++-----------------------+
+
+            1..*
+ Member ------------------ Book
+       (borrows)
+
++-------------------------+
+|        Member           |
++-------------------------+
+| - name : String         |
+| - memberId : int        |
++-------------------------+
+| + borrowBook()          |
+| + returnBook()          |
+| + showBorrowedBooks()   |
++-------------------------+
+
+            1
+Librarian ------------------ Library
+         (manages)
+
++---------------------------+
+|        Librarian          |
++---------------------------+
+| - name : String           |
+| - employeeId : int        |
++---------------------------+
+| + addBook()               |
+| + removeBook()            |
+| + manageMember()          |
++---------------------------+
